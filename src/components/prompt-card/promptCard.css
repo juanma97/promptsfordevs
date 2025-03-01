@@ -1,0 +1,80 @@
+.prompt-card {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .prompt-card:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .card-content {
+    padding: 16px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .tag {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .rating-text {
+    font-size: 0.9rem;
+  }
+  
+  .badge {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+  
+  .premium {
+    background-color: rgba(128, 0, 128, 0.1);
+    color: purple;
+  }
+  
+  .free {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+  }
+  
