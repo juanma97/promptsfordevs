@@ -22,7 +22,7 @@ export function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link href="/" className="nav-logo">
-          PromptHub
+          Prompts for Devs
         </Link>
 
         <div className="nav-actions">
