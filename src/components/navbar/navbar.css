@@ -103,6 +103,32 @@ nav {
     border-color: #6d28d9;
 }
 
+/* Contenedor de los botones de autenticación */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Botones de redes sociales */
+.auth-buttons .nav-auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.auth-buttons .nav-auth-btn:hover {
+    background: rgba(109, 40, 217, 0.1);
+}
+
 /* Ajustes responsivos */
 @media (max-width: 768px) {
     .nav-container {
@@ -111,4 +137,61 @@ nav {
     .nav-actions {
         gap: 0.8rem;
     }
+    .auth-buttons {
+        gap: 0.3rem;
+    }
 }
+
+/* Contenedor del usuario */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* Avatar del usuario */
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+    background: #ff4d4d;
+    color: white;
+    border-color: #ff4d4d;
+    display: flex;
+    align-items: center;
+}
+
+.logout-btn:hover {
+    background: #d43f3f;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-content {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .tooltip-wrapper:hover .tooltip-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  

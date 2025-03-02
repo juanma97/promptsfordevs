@@ -5,16 +5,21 @@ import { PromptCard } from '../../components/prompt-card/PromptCard';
 import "./home.css";
 import { usePrompts } from "../../hooks/usePrompts";
 
-
 export function Home() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const { prompts, loading } = usePrompts();
 
-  const CATEGORIES = [
-    "Categories", 
-    ...new Set(prompts.map((prompt) => prompt.category)),
-  ];
+  const CATEGORIES = ["All", ...new Set(prompts.map((p) => p.category).filter(Boolean))];
+
+  const filteredPrompts = prompts.filter((prompt) => {
+    const matchesSearch = prompt.title.toLowerCase().includes(search.toLowerCase()) || 
+                          prompt.description.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory = category === "all" || prompt.category.toLowerCase() === category.toLowerCase();
+    
+    return matchesSearch && matchesCategory;
+  });
 
   const resetFilters = () => {
     setSearch("");
@@ -63,15 +68,18 @@ export function Home() {
             <div className="loading-spinner"></div>
             <p>Loading prompts...</p>
           </div>
-        ) : (
+        ) : filteredPrompts.length > 0 ? (
           <div className="grid-container">
-            {prompts.map((prompt) => (
+            {filteredPrompts.map((prompt) => (
               <PromptCard key={prompt.id} prompt={prompt} avgRating={4.5} />
             ))}
+          </div>
+        ) : (
+          <div className="no-results">
+            <p>No prompts found matching your criteria.</p>
           </div>
         )}
       </div>
     </div>
   );
 }
-

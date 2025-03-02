@@ -3,6 +3,7 @@ import { Navbar } from "./components/navbar/NavBar";
 import { Home } from "./pages/home/Home";
 import { PromptDetails } from "./pages/prompt-details/PromptDetails";
 import { PromptProvider } from "./context/PromptContext";
+import { AuthProvider } from "./hooks/useAuth";
 
 function Router() {
   return (
@@ -15,6 +16,7 @@ function Router() {
 
 function App() {
   return (
+    <AuthProvider>
     <PromptProvider>
       <div className="app-container">
         <Navbar />
@@ -23,6 +25,7 @@ function App() {
         </main>
       </div>
     </PromptProvider>
+    </AuthProvider>
   );
 }
 
