@@ -15,6 +15,7 @@ export function PromptDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line
     if (selectedPrompt && selectedPrompt.id == params?.id) {
       setPrompt(selectedPrompt);
       setRatings(selectedPrompt.ratings || []);
@@ -60,20 +61,15 @@ export function PromptDetails() {
         <h2>Description</h2>
         <p>{prompt.description}</p>
       </div>
-      <div className="preview pre-container relative">
-        <h2>Preview</h2>
-        <pre>{prompt.preview || 'No preview available'}</pre>
-        <button className="button-outline" onClick={() => copyToClipboard(prompt.preview || '')}>
-          {copied ? <Check size={16} /> : <Copy size={16} />}
-        </button>
-      </div>
       {(!prompt.isPaid || user) && (
         <div className="full-content pre-container relative">
-          <h2>Full Prompt</h2>
-          <pre>{prompt.content}</pre>
-          <button className="button-outline" onClick={() => copyToClipboard(prompt.content)}>
-            {copied ? <Check size={16} /> : <Copy size={16} />}
-          </button>
+          <h2>Prompt</h2>
+          <div className="prompt-container">
+            <pre>{prompt.content}</pre>
+            <button className="button-outline" onClick={() => copyToClipboard(prompt.content)}>
+              {copied ? <Check size={16} /> : <Copy size={16} />}
+            </button>
+          </div>
         </div>
       )}
       {ratings.length > 0 && (

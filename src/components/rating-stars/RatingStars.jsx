@@ -10,11 +10,11 @@ export function RatingStars({ rating, size = 16 }) {
   return (
     <div className="rating-stars">
       {[...Array(fullStars)].map((_, i) => (
-        <Star key={`full-${i}`} size={size} className="star full" />
+        <Star key={`full-${i}`} size={size} className="star full" strokeWidth={0.5} stroke={"black"}/>
       ))}
-      {hasHalfStar && <StarHalf size={size} className="star half" />}
+      {hasHalfStar && <StarHalf size={size} className="star half" strokeWidth={0.5} stroke={"black"}/>}
       {[...Array(emptyStars)].map((_, i) => (
-        <Star key={`empty-${i}`} size={size} className="star empty" />
+        <Star key={`empty-${i}`} size={size} className="star empty"/>
       ))}
     </div>
   );

@@ -17,7 +17,7 @@ const db = getFirestore(app);
 const coleccionRef = collection(db, "prompts");
 
 
-const data = {
+const firstData = {
 "prompts": {
     "prompt1": {
     "id": "1",
@@ -501,6 +501,496 @@ const data = {
     }
 }
 }
+
+const data = {
+    "prompts": {
+
+    
+        "prompt41": {
+        "id": "41",
+        "title": "Optimize SQL Queries for Performance",
+        "description": "Analyze and optimize SQL queries to improve database performance.",
+        "tags": ["SQL", "Database", "Optimization", "Backend"],
+        "category": "backend",
+        "content": "Review SQL queries, add proper indexing, optimize joins, and reduce redundant data retrieval.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:20:00Z",
+        "avgRating": 4.7,
+        "preview": "Optimize SQL queries for faster execution and better performance."
+        },
+        "prompt42": {
+        "id": "42",
+        "title": "Implement JWT Authentication in a REST API",
+        "description": "Secure a REST API by implementing JSON Web Token (JWT) authentication.",
+        "tags": ["Authentication", "JWT", "Security", "REST API"],
+        "category": "backend",
+        "content": "Configure JWT authentication, generate secure tokens, and validate requests in your API.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:25:00Z",
+        "avgRating": 4.8,
+        "preview": "Implement JWT authentication for secure API access."
+        },
+        "prompt43": {
+        "id": "43",
+        "title": "Improve Website Accessibility",
+        "description": "Enhance a website’s accessibility to ensure compliance with WCAG guidelines.",
+        "tags": ["Accessibility", "Web", "UI/UX", "Frontend"],
+        "category": "frontend",
+        "content": "Add ARIA attributes, improve keyboard navigation, and enhance color contrast for better accessibility.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:30:00Z",
+        "avgRating": 4.6,
+        "preview": "Enhance website accessibility for better user experience."
+        },
+        "prompt44": {
+        "id": "44",
+        "title": "Implement Dark Mode in a Web App",
+        "description": "Create a dark mode toggle feature in a web application.",
+        "tags": ["Frontend", "CSS", "JavaScript", "UI"],
+        "category": "frontend",
+        "content": "Use CSS variables, media queries, and JavaScript to implement dark mode support.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:35:00Z",
+        "avgRating": 4.9,
+        "preview": "Add a dark mode feature to your web application."
+        },
+        "prompt45": {
+        "id": "45",
+        "title": "Deploy a Full-Stack App with Docker",
+        "description": "Use Docker to containerize and deploy a full-stack web application.",
+        "tags": ["Docker", "DevOps", "Backend", "Frontend"],
+        "category": "devops",
+        "content": "Create Dockerfiles, define services in Docker Compose, and deploy the app in containers.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:40:00Z",
+        "avgRating": 4.8,
+        "preview": "Containerize and deploy a full-stack application using Docker."
+        },
+        "prompt46": {
+        "id": "46",
+        "title": "Set Up CI/CD Pipeline with GitHub Actions",
+        "description": "Automate builds and deployments using GitHub Actions.",
+        "tags": ["DevOps", "CI/CD", "Automation", "GitHub"],
+        "category": "devops",
+        "content": "Configure GitHub Actions to automate testing, builds, and deployments in your project.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:45:00Z",
+        "avgRating": 4.9,
+        "preview": "Set up a CI/CD pipeline using GitHub Actions."
+        },
+        "prompt47": {
+        "id": "47",
+        "title": "Optimize Images for Web Performance",
+        "description": "Improve website loading speed by optimizing images effectively.",
+        "tags": ["Performance", "Images", "Frontend", "Optimization"],
+        "category": "frontend",
+        "content": "Compress images, use WebP format, lazy-load images, and implement responsive image techniques.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:50:00Z",
+        "avgRating": 4.7,
+        "preview": "Optimize images to improve website performance."
+        },
+        "prompt48": {
+        "id": "48",
+        "title": "Implement WebSockets for Real-Time Communication",
+        "description": "Use WebSockets to enable real-time features in an application.",
+        "tags": ["WebSockets", "Real-time", "Backend", "Frontend"],
+        "category": "backend",
+        "content": "Set up a WebSocket server, handle client connections, and broadcast messages efficiently.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T15:55:00Z",
+        "avgRating": 4.8,
+        "preview": "Implement WebSockets for real-time communication in an app."
+        },
+        "prompt49": {
+        "id": "49",
+        "title": "Secure User Passwords with Hashing",
+        "description": "Implement secure password hashing to protect user data.",
+        "tags": ["Security", "Hashing", "Authentication", "Backend"],
+        "category": "backend",
+        "content": "Use bcrypt, PBKDF2, or Argon2 to securely hash and store user passwords.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:00:00Z",
+        "avgRating": 4.9,
+        "preview": "Hash passwords securely using bcrypt or Argon2."
+        },
+        "prompt50": {
+        "id": "50",
+        "title": "Create a Progressive Web App (PWA)",
+        "description": "Convert a web app into a Progressive Web App (PWA) for better performance.",
+        "tags": ["PWA", "Frontend", "Offline", "Performance"],
+        "category": "frontend",
+        "content": "Add a service worker, manifest file, and caching strategies to make your web app a PWA.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:05:00Z",
+        "avgRating": 4.8,
+        "preview": "Build a Progressive Web App with service workers and caching."
+        },
+        "prompt51": {
+        "id": "51",
+        "title": "Implement Multi-Tenant Architecture in a SaaS Application",
+        "description": "Design and implement a multi-tenant system for a SaaS platform.",
+        "tags": ["SaaS", "Multi-Tenancy", "Backend", "Database"],
+        "category": "backend",
+        "content": "Set up database sharding or row-level security, handle tenant-based authentication, and implement isolated tenant environments.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:10:00Z",
+        "avgRating": 4.9,
+        "preview": "Implement a multi-tenant architecture in a SaaS application."
+        },
+        "prompt52": {
+        "id": "52",
+        "title": "Develop a GraphQL API with Advanced Authorization",
+        "description": "Create a GraphQL API with role-based and field-level authorization.",
+        "tags": ["GraphQL", "Security", "API", "Authorization"],
+        "category": "backend",
+        "content": "Use middleware to enforce role-based access control (RBAC) and limit field access dynamically based on user roles.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:15:00Z",
+        "avgRating": 4.9,
+        "preview": "Build a GraphQL API with advanced authorization techniques."
+        },
+        "prompt53": {
+        "id": "53",
+        "title": "Design a Scalable Event-Driven Microservices Architecture",
+        "description": "Implement an event-driven architecture using Kafka or RabbitMQ.",
+        "tags": ["Microservices", "Event-Driven", "Architecture", "Messaging"],
+        "category": "backend",
+        "content": "Use event sourcing and publish-subscribe messaging patterns to decouple microservices while ensuring reliability and scalability.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:20:00Z",
+        "avgRating": 4.9,
+        "preview": "Design an event-driven microservices architecture with message brokers."
+        },
+        "prompt54": {
+        "id": "54",
+        "title": "Implement End-to-End Encryption in a Messaging App",
+        "description": "Secure chat messages using end-to-end encryption (E2EE).",
+        "tags": ["Security", "Encryption", "Messaging", "Cryptography"],
+        "category": "security",
+        "content": "Use asymmetric encryption (RSA, ECC) for key exchange and symmetric encryption (AES) for message encryption in a chat system.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:25:00Z",
+        "avgRating": 5.0,
+        "preview": "Implement E2EE for secure communication in a messaging app."
+        },
+        "prompt55": {
+        "id": "55",
+        "title": "Optimize a High-Traffic Web Application for 1M+ Users",
+        "description": "Scale a web application to handle millions of users efficiently.",
+        "tags": ["Performance", "Scaling", "Web Applications", "Optimization"],
+        "category": "backend",
+        "content": "Use database replication, caching (Redis, Memcached), load balancing, and CDNs to optimize a web app for high traffic.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:30:00Z",
+        "avgRating": 5.0,
+        "preview": "Scale a web app to handle millions of concurrent users efficiently."
+        },
+        "prompt56": {
+        "id": "56",
+        "title": "Implement a Zero Downtime Deployment Strategy",
+        "description": "Deploy updates to a production system with zero downtime.",
+        "tags": ["DevOps", "Deployment", "CI/CD", "Scaling"],
+        "category": "devops",
+        "content": "Use blue-green deployments, rolling updates, or feature flags to deploy software without downtime.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:35:00Z",
+        "avgRating": 4.9,
+        "preview": "Deploy applications with zero downtime using blue-green deployment."
+        },
+        "prompt57": {
+        "id": "57",
+        "title": "Develop a Custom Machine Learning Model for Anomaly Detection",
+        "description": "Train a custom ML model to detect anomalies in data streams.",
+        "tags": ["Machine Learning", "AI", "Anomaly Detection", "Data Science"],
+        "category": "machine-learning",
+        "content": "Use unsupervised learning techniques like autoencoders or Isolation Forest to detect outliers in real-time data streams.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:40:00Z",
+        "avgRating": 5.0,
+        "preview": "Create an ML model for real-time anomaly detection."
+        },
+        "prompt58": {
+        "id": "58",
+        "title": "Build a Custom WebAssembly (WASM) Module for Performance",
+        "description": "Develop a WebAssembly module to optimize heavy computations in a web app.",
+        "tags": ["WASM", "Performance", "Optimization", "Web"],
+        "category": "frontend",
+        "content": "Write a WebAssembly module in Rust or C++ to offload CPU-intensive tasks in a JavaScript web application.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:45:00Z",
+        "avgRating": 5.0,
+        "preview": "Enhance web performance by offloading tasks to a WebAssembly module."
+        },
+        "prompt59": {
+        "id": "59",
+        "title": "Design a Distributed Logging System for Microservices",
+        "description": "Implement a centralized logging system for distributed microservices.",
+        "tags": ["Microservices", "Logging", "Monitoring", "DevOps"],
+        "category": "devops",
+        "content": "Use ELK Stack (Elasticsearch, Logstash, Kibana) or Loki to aggregate logs across microservices for analysis and monitoring.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:50:00Z",
+        "avgRating": 4.9,
+        "preview": "Centralize and analyze logs from microservices using ELK Stack."
+        },
+        "prompt60": {
+        "id": "60",
+        "title": "Develop a Custom Linter Plugin for Code Quality Enforcement",
+        "description": "Create a linter plugin to enforce coding standards in a development team.",
+        "tags": ["Code Quality", "Linting", "Automation", "Development"],
+        "category": "devtools",
+        "content": "Develop an ESLint or Prettier plugin to enforce project-specific code style rules.",
+        "author": "AI Prompt Generator",
+        "createdAt": "2024-03-02T16:55:00Z",
+        "avgRating": 5.0,
+        "preview": "Create a custom linter plugin to enforce team coding standards."
+        },
+        "prompt61": {
+            "id": "61",
+            "title": "Implement a Smart Contract for Decentralized Voting",
+            "description": "Develop a smart contract on Ethereum for a secure and tamper-proof voting system.",
+            "tags": ["Blockchain", "Smart Contracts", "Ethereum", "Voting"],
+            "category": "blockchain",
+            "content": "Use Solidity to create a decentralized voting system with transparent and immutable results.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:00:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a smart contract for secure voting on Ethereum."
+        },
+        "prompt62": {
+            "id": "62",
+            "title": "Develop an AI-Powered Code Review Bot",
+            "description": "Create an AI-driven tool that reviews code for best practices and security vulnerabilities.",
+            "tags": ["AI", "Code Review", "Automation", "Machine Learning"],
+            "category": "ai",
+            "content": "Use OpenAI's GPT or custom NLP models to analyze pull requests and suggest improvements.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:05:00Z",
+            "avgRating": 5.0,
+            "preview": "Automate code reviews using AI and machine learning."
+        },
+        "prompt63": {
+            "id": "63",
+            "title": "Optimize a Database for Real-Time Analytics at Scale",
+            "description": "Design a database architecture for low-latency analytics on large datasets.",
+            "tags": ["Big Data", "Optimization", "Database", "Real-Time"],
+            "category": "big-data",
+            "content": "Use columnar storage, partitioning, indexing, and caching to improve query performance.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:10:00Z",
+            "avgRating": 5.0,
+            "preview": "Optimize databases for real-time analytics and massive datasets."
+        },
+        "prompt64": {
+            "id": "64",
+            "title": "Develop a Low-Latency WebSocket Server for Financial Trading",
+            "description": "Create a high-performance WebSocket server for live stock trading updates.",
+            "tags": ["Low Latency", "Finance", "WebSockets", "Real-Time"],
+            "category": "low-latency",
+            "content": "Use Redis Pub/Sub, message queues, and efficient data serialization (Protocol Buffers) to minimize latency.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:15:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a WebSocket server for real-time stock trading updates."
+        },
+        "prompt65": {
+            "id": "65",
+            "title": "Build an Automated AI-Based Cybersecurity Threat Detection System",
+            "description": "Use AI to detect anomalies and potential security breaches in real time.",
+            "tags": ["Cybersecurity", "AI", "Threat Detection", "Security"],
+            "category": "security",
+            "content": "Implement deep learning models like LSTMs or autoencoders to detect unusual network activity.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:20:00Z",
+            "avgRating": 5.0,
+            "preview": "Develop an AI system for detecting cybersecurity threats in real time."
+        },
+        "prompt66": {
+            "id": "66",
+            "title": "Implement a Scalable Distributed Cache with Consistent Hashing",
+            "description": "Design a distributed cache system that scales efficiently.",
+            "tags": ["Distributed Systems", "Caching", "Performance", "Optimization"],
+            "category": "backend",
+            "content": "Use consistent hashing with Redis or Memcached to distribute cache load across multiple nodes.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:25:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a distributed cache system using consistent hashing."
+        },
+        "prompt67": {
+            "id": "67",
+            "title": "Create an AI-Powered Chatbot with Memory and Context Awareness",
+            "description": "Develop a chatbot that maintains conversational context and history.",
+            "tags": ["AI", "Chatbot", "NLP", "Machine Learning"],
+            "category": "ai",
+            "content": "Use transformers like GPT-4 with vector databases for storing conversation history efficiently.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:30:00Z",
+            "avgRating": 5.0,
+            "preview": "Develop an AI chatbot that remembers context in conversations."
+        },
+        "prompt68": {
+            "id": "68",
+            "title": "Design a Secure Federated Authentication System",
+            "description": "Implement authentication using OAuth2, OpenID Connect, and JWT.",
+            "tags": ["Security", "Authentication", "OAuth2", "SSO"],
+            "category": "security",
+            "content": "Set up an authentication flow with OAuth2 providers and JWT tokens for federated identity management.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:35:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a secure federated authentication system with OAuth2."
+        },
+        "prompt69": {
+            "id": "69",
+            "title": "Optimize Network Traffic Using QUIC Protocol",
+            "description": "Improve web performance by implementing the QUIC protocol.",
+            "tags": ["Performance", "Networking", "Optimization", "QUIC"],
+            "category": "low-latency",
+            "content": "Use QUIC to replace TCP and reduce latency in web applications.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:40:00Z",
+            "avgRating": 5.0,
+            "preview": "Optimize network traffic using the QUIC protocol."
+        },
+        "prompt70": {
+            "id": "70",
+            "title": "Implement Homomorphic Encryption for Secure Data Processing",
+            "description": "Use homomorphic encryption to process encrypted data without decryption.",
+            "tags": ["Encryption", "Privacy", "Security", "Cryptography"],
+            "category": "security",
+            "content": "Implement a system using Fully Homomorphic Encryption (FHE) to allow computations on encrypted data.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T17:45:00Z",
+            "avgRating": 5.0,
+            "preview": "Securely process encrypted data using homomorphic encryption."
+        },
+        "prompt71": {
+            "id": "71",
+            "title": "Implement JWT Authentication in a Spring Boot API",
+            "description": "Secure your Spring Boot REST API using JSON Web Tokens (JWT).",
+            "tags": ["Java", "Spring Boot", "Security", "JWT"],
+            "category": "backend",
+            "content": "Use Spring Security with JWT authentication to secure API endpoints, manage user sessions, and implement role-based access control.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:00:00Z",
+            "avgRating": 5.0,
+            "preview": "Secure your Spring Boot API with JWT authentication."
+        },
+        "prompt72": {
+            "id": "72",
+            "title": "Create a Global Loading Spinner Component in React",
+            "description": "Develop a global loading indicator that appears during API requests.",
+            "tags": ["React", "Frontend", "UX", "Loading Spinner"],
+            "category": "frontend",
+            "content": "Use React context and hooks to manage a global loading state and show a spinner during asynchronous requests.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:05:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a global loading spinner component in React."
+        },
+        "prompt73": {
+            "id": "73",
+            "title": "Implement Role-Based Access Control (RBAC) in Spring Boot",
+            "description": "Restrict API access using user roles and permissions.",
+            "tags": ["Java", "Spring Boot", "Security", "RBAC"],
+            "category": "backend",
+            "content": "Configure Spring Security to enforce role-based access control with database-driven user roles.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:10:00Z",
+            "avgRating": 5.0,
+            "preview": "Implement role-based access control in Spring Boot."
+        },
+        "prompt74": {
+            "id": "74",
+            "title": "Develop a Search Input Component with Debouncing in React",
+            "description": "Create a search bar that delays API calls to improve performance.",
+            "tags": ["React", "Search", "Performance", "Frontend"],
+            "category": "frontend",
+            "content": "Use the `useState` and `useEffect` hooks to implement debounced search queries in React.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:15:00Z",
+            "avgRating": 5.0,
+            "preview": "Build a React search input with debouncing for better performance."
+        },
+        "prompt75": {
+            "id": "75",
+            "title": "Optimize Spring Boot API Performance with Caching",
+            "description": "Improve API response times by caching data using Spring Cache.",
+            "tags": ["Java", "Spring Boot", "Performance", "Caching"],
+            "category": "backend",
+            "content": "Use Spring Boot's caching abstraction with Redis to store frequently accessed data and improve performance.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:20:00Z",
+            "avgRating": 5.0,
+            "preview": "Enhance API performance by caching responses with Spring Boot."
+        },
+        "prompt76": {
+            "id": "76",
+            "title": "Build an Infinite Scrolling List in React",
+            "description": "Implement a dynamic list that loads more items as the user scrolls.",
+            "tags": ["React", "Frontend", "UX", "Performance"],
+            "category": "frontend",
+            "content": "Use the Intersection Observer API and React hooks to dynamically fetch more data as the user scrolls.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:25:00Z",
+            "avgRating": 5.0,
+            "preview": "Create an infinite scrolling list component in React."
+        },
+        "prompt77": {
+            "id": "77",
+            "title": "Implement File Upload with Spring Boot and React",
+            "description": "Create an API and frontend component for handling file uploads.",
+            "tags": ["Java", "Spring Boot", "React", "File Upload"],
+            "category": "fullstack",
+            "content": "Use Spring Boot's MultipartFile and React's File API to allow users to upload and preview files.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:30:00Z",
+            "avgRating": 5.0,
+            "preview": "Develop a file upload feature using Spring Boot and React."
+        },
+        "prompt78": {
+            "id": "78",
+            "title": "Set Up Server-Sent Events (SSE) in Spring Boot",
+            "description": "Enable real-time updates in your API using Server-Sent Events.",
+            "tags": ["Java", "Spring Boot", "Real-Time", "SSE"],
+            "category": "backend",
+            "content": "Use Spring Boot’s `SseEmitter` to send real-time updates to clients over HTTP connections.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:35:00Z",
+            "avgRating": 5.0,
+            "preview": "Implement real-time updates in Spring Boot using SSE."
+        },
+        "prompt79": {
+            "id": "79",
+            "title": "Create a React Skeleton Loader for Faster Perceived Loading",
+            "description": "Improve UX by showing skeleton placeholders while data loads.",
+            "tags": ["React", "Frontend", "UX", "Loading"],
+            "category": "frontend",
+            "content": "Use CSS and React state to display skeleton loaders before actual content is rendered.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:40:00Z",
+            "avgRating": 5.0,
+            "preview": "Enhance user experience with a React skeleton loader."
+        },
+        "prompt80": {
+            "id": "80",
+            "title": "Implement Multi-Tenancy in a Spring Boot Application",
+            "description": "Design a Spring Boot app that supports multiple tenants with isolated data.",
+            "tags": ["Java", "Spring Boot", "Multi-Tenancy", "Database"],
+            "category": "backend",
+            "content": "Use Hibernate filters or separate databases to implement multi-tenancy in Spring Boot applications.",
+            "author": "AI Prompt Generator",
+            "createdAt": "2024-03-02T18:45:00Z",
+            "avgRating": 5.0,
+            "preview": "Implement multi-tenancy in a Spring Boot backend."
+        }
+    } 
+}
+      
+  
+  
 
 const subirDatos = async () => {
     try {
