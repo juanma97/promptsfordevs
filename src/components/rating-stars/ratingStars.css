@@ -5,6 +5,11 @@
   
   .star {
     margin-right: 2px;
+    transition: transform 0.2s ease;
+  }
+  
+  .star:hover {
+    transform: scale(1.2);
   }
   
   .star.full {
