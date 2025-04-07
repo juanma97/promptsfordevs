@@ -42,15 +42,40 @@ export function RatingStars({ rating, size = 16, onRate }) {
         />
       ))}
       {hasHalfStar && (
-        <StarHalf 
-          size={size} 
-          className="star half" 
-          strokeWidth={0.5} 
-          stroke={"black"}
-          onClick={() => handleStarClick(fullStars)}
-          onMouseEnter={() => handleStarHover(fullStars)}
-          style={{ cursor: onRate ? 'pointer' : 'default' }}
-        />
+        <div className="half-star-container" style={{ 
+          position: 'relative', 
+          display: 'inline-block',
+          lineHeight: 0
+        }}>
+          <Star 
+            size={size} 
+            className="star empty"
+            strokeWidth={0.5} 
+            stroke={"black"}
+            onClick={() => handleStarClick(fullStars)}
+            onMouseEnter={() => handleStarHover(fullStars)}
+            style={{ cursor: onRate ? 'pointer' : 'default' }}
+          />
+          <div style={{ 
+            position: 'absolute', 
+            top: '50%', 
+            left: 0, 
+            transform: 'translateY(-50%)',
+            overflow: 'hidden', 
+            width: '50%',
+            height: size
+          }}>
+            <Star 
+              size={size} 
+              className="star full" 
+              strokeWidth={0.5} 
+              stroke={"black"}
+              onClick={() => handleStarClick(fullStars)}
+              onMouseEnter={() => handleStarHover(fullStars)}
+              style={{ cursor: onRate ? 'pointer' : 'default' }}
+            />
+          </div>
+        </div>
       )}
       {[...Array(emptyStars)].map((_, i) => (
         <Star 

@@ -19,6 +19,7 @@ export function PromptDetails() {
   const [newComment, setNewComment] = useState('');
   const auth = getAuth();
   const user = auth.currentUser;
+  const [sortBy, setSortBy] = useState('newest'); // 'newest', 'highest', 'lowest'
 
   useEffect(() => {
     if (selectedPrompt && selectedPrompt.id === params?.id) {
@@ -120,6 +121,18 @@ export function PromptDetails() {
 
   const avgRating = ratings.length ? ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length : 0;
 
+  const sortedRatings = [...ratings].sort((a, b) => {
+    switch (sortBy) {
+      case 'highest':
+        return b.rating - a.rating;
+      case 'lowest':
+        return a.rating - b.rating;
+      case 'newest':
+      default:
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    }
+  });
+
   if (loading) {
     return <div className="container loading">Cargando...</div>;
   }
@@ -130,60 +143,108 @@ export function PromptDetails() {
 
   return (
     <div className="container prompt-details">
-      <h1 className="title">{prompt.title}</h1>
-      <div className="info flex gap-4 mb-6">
-        <div className="rating-container flex gap-2">
-          <RatingStars rating={avgRating} size={20} />
-          <span className="text-sm text-muted-foreground">({avgRating.toFixed(1)})</span>
-        </div>
-      </div>
-      <div className="description prose">
-        <h2>Descripción</h2>
-        <p>{prompt.description}</p>
-      </div>
-      <div className="full-content pre-container relative">
-        <h2>Prompt</h2>
-        <div className="prompt-container">
-          <pre>{prompt.content}</pre>
-          <button className="button-outline" onClick={() => copyToClipboard(prompt.content)}>
-            {copied ? <Check size={16} /> : <Copy size={16} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Formulario para agregar una review */}
-      {user && (
-        <div className="add-review">
-          <h2>Deja tu review</h2>
-          <div className="rating-input">
-            <RatingStars rating={newRating} size={24} onRate={setNewRating} />
+      <div className="card">
+        <h1 className="title">{prompt.title}</h1>
+        <div className="info flex gap-4 mb-6">
+          <div className="rating-container flex gap-2">
+            <RatingStars rating={avgRating} size={20} />
+            <span className="text-sm text-muted-foreground">({avgRating.toFixed(1)})</span>
           </div>
-          <textarea
-            placeholder="Escribe tu comentario..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          />
-          <button className="button" onClick={handleSubmitReview}>
-            Enviar Review
-          </button>
         </div>
-      )}
+        <div className="description prose">
+          <h2>Descripción</h2>
+          <p>{prompt.description}</p>
+        </div>
+        <div className="full-content">
+          <h2>Prompt</h2>
+          <div className="prompt-container">
+            <pre>{prompt.content}</pre>
+            <button 
+              className="button-outline" 
+              onClick={() => copyToClipboard(prompt.content)}
+              title="Copiar prompt"
+            >
+              {copied ? <Check /> : <Copy />}
+            </button>
+          </div>
+        </div>
 
-      {/* Sección de reviews */}
-      {ratings.length > 0 && (
-        <div className="reviews-container reviews">
-          <h2>Reviews</h2>
-          {ratings.map((rating) => (
-            <div key={rating.id} className="review">
-              <div className="rating flex gap-2 mb-2">
-                <RatingStars rating={rating.rating} size={16} />
-              </div>
-              <p className="text-sm text-muted-foreground">{rating.comment}</p>
-              <span className="text-xs text-gray-500">- {rating.author}</span>
+        {/* Formulario para agregar una review */}
+        {user && (
+          <div className="add-review">
+            <h2>Deja tu review</h2>
+            <div className="rating-input">
+              <p className="text-sm text-muted-foreground mb-2">¿Cómo calificarías este prompt?</p>
+              <RatingStars rating={newRating} size={24} onRate={setNewRating} />
             </div>
-          ))}
-        </div>
-      )}
+            <div className="comment-input">
+              <p className="text-sm text-muted-foreground mb-2">Tu comentario</p>
+              <textarea
+                placeholder="Escribe tu opinión sobre este prompt..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+            </div>
+            <button 
+              className="button" 
+              onClick={handleSubmitReview}
+              disabled={!newRating || !newComment.trim()}
+            >
+              Enviar Review
+            </button>
+          </div>
+        )}
+
+        {/* Sección de reviews */}
+        {ratings.length > 0 && (
+          <div className="reviews-container">
+            <div className="reviews-header">
+              <h2 className="text-xl font-semibold">Reviews</h2>
+              <div className="sort-options">
+                <button 
+                  className={`sort-button ${sortBy === 'newest' ? 'active' : ''}`}
+                  onClick={() => setSortBy('newest')}
+                >
+                  Más recientes
+                </button>
+                <button 
+                  className={`sort-button ${sortBy === 'highest' ? 'active' : ''}`}
+                  onClick={() => setSortBy('highest')}
+                >
+                  Más positivas
+                </button>
+                <button 
+                  className={`sort-button ${sortBy === 'lowest' ? 'active' : ''}`}
+                  onClick={() => setSortBy('lowest')}
+                >
+                  Más negativas
+                </button>
+              </div>
+            </div>
+            {sortedRatings.map((rating) => (
+              <div key={rating.id} className="review">
+                <div className="rating flex gap-2">
+                  <RatingStars rating={rating.rating} size={16} />
+                  <span className="text-sm text-muted-foreground">
+                    ({rating.rating.toFixed(1)})
+                  </span>
+                </div>
+                <p className="comment">{rating.comment}</p>
+                <div className="footer">
+                  <span className="author">{rating.author}</span>
+                  <span className="date">
+                    {new Date(rating.createdAt).toLocaleDateString('es-ES', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
