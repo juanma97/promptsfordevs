@@ -1,80 +1,144 @@
 .prompt-card {
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .prompt-card:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-link {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  
-  .card-content {
-    padding: 16px;
-  }
-  
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .card-description {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 12px;
-  }
-  
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .tag {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-  }
-  
-  .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .rating-text {
-    font-size: 0.9rem;
-  }
-  
-  .badge {
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 0.8rem;
-  }
-  
-  .premium {
-    background-color: rgba(128, 0, 128, 0.1);
-    color: purple;
-  }
-  
-  .free {
-    background-color: rgba(0, 123, 255, 0.1);
-    color: #007bff;
-  }
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1rem;
+}
+
+.card-header {
+  margin-bottom: 0.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge.premium {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge.free {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Efecto de hover en la tarjeta */
+.prompt-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f59e0b, #8b5cf6);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.prompt-card:hover::before {
+  opacity: 1;
+}
+
+/* Animación al hacer clic */
+@keyframes cardClick {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.prompt-card:active {
+  animation: cardClick 0.2s ease-in-out;
+}
   

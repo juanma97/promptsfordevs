@@ -9,8 +9,9 @@ export function PromptProvider({ children }) {
   const addPrompt = (newPrompt) => {
     setPrompts((prevPrompts) => [...prevPrompts, newPrompt]);
   };
+
   return (
-    <PromptContext.Provider value={{ selectedPrompt, setSelectedPrompt }}>
+    <PromptContext.Provider value={{ selectedPrompt, setSelectedPrompt, prompts, addPrompt }}>
       {children}
     </PromptContext.Provider>
   );
