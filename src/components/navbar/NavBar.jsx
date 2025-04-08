@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useState } from "react";
 import { Button } from "../button/Button";
-import { Plus, Crown, Mail, LogOut } from "lucide-react";
+import { Plus, Crown, Mail, LogOut, Star, TrendingUp } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth"; 
@@ -15,6 +15,17 @@ export function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link href="/" className="nav-logo">Prompts for Devs</Link>
+
+        <div className="nav-links">
+          <Link href="/featured" className="nav-link">
+            <Star size={16} />
+            Destacados
+          </Link>
+          <Link href="/popular" className="nav-link">
+            <TrendingUp size={16} />
+            Populares
+          </Link>
+        </div>
 
         <div className="nav-actions">
           <div 

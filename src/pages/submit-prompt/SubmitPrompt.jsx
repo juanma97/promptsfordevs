@@ -103,9 +103,15 @@ export function SubmitPrompt() {
       category: formData.category.trim(),
       tags: formData.tags,
       author: user.displayName || user.email,
+      authorId: user.uid,
+      authorPhoto: user.photoURL,
       avgRating: 0,
       reviews: {},
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      views: 0,
+      likes: 0,
+      isFeatured: false,
+      popularityScore: 0
     };
 
     try {

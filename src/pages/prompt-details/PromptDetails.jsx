@@ -1,6 +1,6 @@
 import { useRoute } from 'wouter';
 import { useState, useEffect, useContext } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, Eye, Heart, Star } from 'lucide-react';
 import { RatingStars } from '../../components/rating-stars/RatingStars';
 import { PromptContext } from '../../context/PromptContext';
 import { db } from '../../firebaseConfig';
@@ -144,7 +144,31 @@ export function PromptDetails() {
   return (
     <div className="container prompt-details">
       <div className="card">
-        <h1 className="title">{prompt.title}</h1>
+        <div className="prompt-header">
+          <div>
+            <h1 className="title">{prompt.title}</h1>
+            <div className="prompt-stats">
+              <div className="stat">
+                <Eye size={16} />
+                <span>{prompt.views || 0} vistas</span>
+              </div>
+              <div className="stat">
+                <Heart size={16} />
+                <span>{prompt.likes || 0} likes</span>
+              </div>
+              <div className="stat">
+                <Star size={16} />
+                <span>{avgRating.toFixed(1)} ({ratings.length} reviews)</span>
+              </div>
+            </div>
+          </div>
+          {prompt.isFeatured && (
+            <div className="featured-badge">
+              <Star size={16} />
+              Destacado
+            </div>
+          )}
+        </div>
         <div className="info flex gap-4 mb-6">
           <div className="rating-container flex gap-2">
             <RatingStars rating={avgRating} size={20} />

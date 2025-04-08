@@ -400,3 +400,55 @@
 .review .date {
   color: #9ca3af;
 }
+
+.prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.prompt-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.stat svg {
+  color: #8b5cf6;
+}
+
+.featured-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  color: #8b5cf6;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .prompt-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .prompt-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .featured-badge {
+    align-self: flex-start;
+  }
+}

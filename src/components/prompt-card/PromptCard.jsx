@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'wouter';
 import { PromptContext } from '../../context/PromptContext';
+import { Eye, Heart, Star } from 'lucide-react';
 import './promptCard.css';
 
 export function PromptCard({ prompt }) {
@@ -26,6 +27,12 @@ export function PromptCard({ prompt }) {
               <h2 className="card-title">{prompt.title}</h2>
               <p className="card-description">{prompt.description}</p>
             </div>
+            {prompt.isFeatured && (
+              <div className="featured-badge">
+                <Star size={14} />
+                Destacado
+              </div>
+            )}
           </div>
 
           <div className="tags-container">
@@ -37,8 +44,19 @@ export function PromptCard({ prompt }) {
           </div>
 
           <div className="card-footer">
-            <div className="rating">
-              <span className="rating-text">⭐ {calculateAverageRating(prompt.ratings)}</span>
+            <div className="stats">
+              <div className="stat">
+                <Eye size={14} />
+                <span>{prompt.views || 0}</span>
+              </div>
+              <div className="stat">
+                <Heart size={14} />
+                <span>{prompt.likes || 0}</span>
+              </div>
+              <div className="stat">
+                <Star size={14} />
+                <span>{calculateAverageRating(prompt.ratings).toFixed(1)}</span>
+              </div>
             </div>
             <span className={prompt.isPaid ? 'badge premium' : 'badge free'}>
               {prompt.isPaid ? 'Premium' : 'Free'}
