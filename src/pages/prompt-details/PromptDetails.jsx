@@ -4,7 +4,7 @@ import { Copy, Check, Eye, Heart, Star } from 'lucide-react';
 import { RatingStars } from '../../components/rating-stars/RatingStars';
 import { PromptContext } from '../../context/PromptContext';
 import { db } from '../../firebaseConfig';
-import { collection, addDoc, getDocs, getDoc, doc, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, updateDoc, query, where, increment } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import './promptDetails.css';
 
@@ -20,40 +20,69 @@ export function PromptDetails() {
   const auth = getAuth();
   const user = auth.currentUser;
   const [sortBy, setSortBy] = useState('newest'); // 'newest', 'highest', 'lowest'
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [viewCounted, setViewCounted] = useState(false);
 
   useEffect(() => {
     if (selectedPrompt && selectedPrompt.id === params?.id) {
-      setPrompt(selectedPrompt);
-      fetchReviews(selectedPrompt.id);
-      setLoading(false);
+      loadPromptFromFirestore();
     } else {
       loadPromptFromFirestore();
     }
   }, [params?.id, selectedPrompt]);
 
+  useEffect(() => {
+    if (user && prompt) {
+      setLikeCount(prompt.likes || 0);
+      const userLikes = prompt.userLikes || [];
+      setLiked(userLikes.includes(user.uid));
+    }
+  }, [user, prompt]);
+
+  useEffect(() => {
+    const handleViewCount = async () => {
+      
+      if (prompt?.docId && !viewCounted) {
+        await incrementViews(prompt.docId);
+        setViewCounted(true);
+      }
+    };
+
+    handleViewCount();
+  }, [prompt?.docId, viewCounted]);
+
   const loadPromptFromFirestore = async () => {
     try {
-      const promptDoc = doc(db, 'prompts', params?.id);
-      const promptSnapshot = await getDoc(promptDoc);
+      const promptsRef = collection(db, 'prompts');
+      const q = query(promptsRef, where('id', '==', params?.id));
+      const querySnapshot = await getDocs(q);
 
-      if (promptSnapshot.exists()) {
-        setPrompt({ id: params?.id, ...promptSnapshot.data() });
-        await fetchReviews(params?.id);
+      if (!querySnapshot.empty) {
+        const promptDoc = querySnapshot.docs[0];
+        const firestoreId = promptDoc.id;
+        
+        const promptData = {
+          ...promptDoc.data(),
+          docId: firestoreId,
+          id: params?.id
+        };
+        
+        setPrompt(promptData);
+        await fetchReviews(firestoreId);
       } else {
         setPrompt(null);
       }
     } catch (error) {
       console.error('Error al cargar el prompt:', error);
     } finally {
-      console.log('finally');
       setLoading(false);
     }
-};
+  };
 
-
-  const fetchReviews = async (promptId) => {
+  const fetchReviews = async (docId) => {
     try {
-      const reviewsRef = collection(db, `prompts/${promptId}/reviews`);
+      const reviewsRef = collection(db, `prompts/${docId}/reviews`);
       const reviewsSnapshot = await getDocs(reviewsRef);
       const reviewsData = reviewsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setRatings(reviewsData);
@@ -85,7 +114,6 @@ export function PromptDetails() {
       createdAt: new Date().toISOString(),
       userId: user.uid
     };
-
 
     try {
       const reviewsRef = collection(db, `prompts/${prompt.id}/reviews`);
@@ -119,6 +147,32 @@ export function PromptDetails() {
     }
   };
 
+  const incrementViews = async (docId) => {
+    try {
+      const promptRef = doc(db, 'prompts', docId);
+      
+      const promptSnap = await getDoc(promptRef);
+      if (!promptSnap.exists()) {
+        console.error('No se encontró el documento en Firestore');
+        return;
+      }
+
+      const currentViews = promptSnap.data().views ?? 0;
+      
+      await updateDoc(promptRef, {
+        views: currentViews + 1
+      });
+
+      setPrompt(prev => ({
+        ...prev,
+        views: currentViews + 1
+      }));
+
+    } catch (error) {
+      console.error('Error al actualizar las vistas:', error);
+    }
+  };
+
   const avgRating = ratings.length ? ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length : 0;
 
   const sortedRatings = [...ratings].sort((a, b) => {
@@ -132,6 +186,46 @@ export function PromptDetails() {
         return new Date(b.createdAt) - new Date(a.createdAt);
     }
   });
+
+  const handleLike = async () => {
+    if (!user) {
+      alert('Debes iniciar sesión para dar like');
+      return;
+    }
+
+    try {
+      const promptRef = doc(db, 'prompts', prompt.docId);
+      const userLikes = Array.isArray(prompt.userLikes) ? prompt.userLikes : [];
+      const currentLikes = prompt.likes ?? 0;
+      const newLikeStatus = !liked;
+      
+      const newLikeCount = newLikeStatus 
+        ? (currentLikes + 1) 
+        : (currentLikes - 1);
+      
+      const updatedUserLikes = newLikeStatus
+        ? [...userLikes, user.uid]
+        : userLikes.filter(id => id !== user.uid);
+
+      await updateDoc(promptRef, {
+        likes: newLikeCount,
+        userLikes: updatedUserLikes
+      });
+
+      setLiked(newLikeStatus);
+      setLikeCount(newLikeCount);
+      
+      setPrompt(prev => ({
+        ...prev,
+        likes: newLikeCount,
+        userLikes: updatedUserLikes
+      }));
+
+    } catch (error) {
+      console.error('Error al actualizar likes:', error);
+      alert('Error al actualizar el like. Por favor, intenta de nuevo.');
+    }
+  };
 
   if (loading) {
     return <div className="container loading">Cargando...</div>;
@@ -153,8 +247,17 @@ export function PromptDetails() {
                 <span>{prompt.views || 0} vistas</span>
               </div>
               <div className="stat">
-                <Heart size={16} />
-                <span>{prompt.likes || 0} likes</span>
+                <button 
+                  className={`like-button ${liked ? 'liked' : ''}`}
+                  onClick={handleLike}
+                  disabled={!user}
+                >
+                  <Heart 
+                    size={16} 
+                    fill={liked ? 'currentColor' : 'none'} 
+                  />
+                  <span>{likeCount}</span>
+                </button>
               </div>
               <div className="stat">
                 <Star size={16} />

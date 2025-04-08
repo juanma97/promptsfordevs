@@ -16,7 +16,7 @@ export function Navbar() {
       <div className="nav-container">
         <Link href="/" className="nav-logo">Prompts for Devs</Link>
 
-        <div className="nav-links">
+        {/* <div className="nav-links">
           <Link href="/featured" className="nav-link">
             <Star size={16} />
             Destacados
@@ -25,7 +25,7 @@ export function Navbar() {
             <TrendingUp size={16} />
             Populares
           </Link>
-        </div>
+        </div> */}
 
         <div className="nav-actions">
           <div 
