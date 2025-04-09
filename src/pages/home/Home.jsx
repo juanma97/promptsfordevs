@@ -4,8 +4,10 @@ import { Search } from "lucide-react";
 import { PromptCard } from "../../components/prompt-card/PromptCard";
 import "./home.css";
 import { usePrompts } from "../../hooks/usePrompts";
+import { useTranslation } from "react-i18next";
 
 export function Home() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const { prompts, loading } = usePrompts();
@@ -56,14 +58,14 @@ export function Home() {
     <div className="home-container">
       <div className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">Discover AI Prompts</h1>
-          <p className="hero-subtitle">Find and share prompts for testing, development, and professional growth</p>
+          <h1 className="hero-title">{t('home.hero.title')}</h1>
+          <p className="hero-subtitle">{t('home.hero.subtitle')}</p>
           <div className="filters-container">
             <div className="search-box">
               <Search className="search-icon" />
               <Input
                 className="search-input"
-                placeholder="Search prompts..."
+                placeholder={t('home.search.placeholder')}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
@@ -76,7 +78,7 @@ export function Home() {
               ))}
             </select>
             <button className="reset-button" onClick={resetFilters}>
-              Reset Filters
+              {t('home.filters.reset')}
             </button>
           </div>
         </div>
@@ -86,7 +88,7 @@ export function Home() {
         {loading ? (
           <div className="loading-container">
             <div className="loading-spinner"></div>
-            <p>Loading prompts...</p>
+            <p>{t('home.loading')}</p>
           </div>
         ) : filteredPrompts.length > 0 ? (
           <div className="grid-container">
@@ -101,7 +103,7 @@ export function Home() {
           </div>
         ) : (
           <div className="no-results">
-            <p>No prompts found matching your criteria.</p>
+            <p>{t('home.noResults')}</p>
           </div>
         )}
       </div>
