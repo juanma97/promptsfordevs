@@ -283,4 +283,32 @@
         display: none;
     }
 }
+
+.language-buttons {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: auto;
+    margin-right: 0;
+    padding-left: 1rem;
+    border-left: 1px solid var(--border-color);
+}
+
+.language-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.language-button:hover {
+    background-color: var(--bg-hover);
+}
+
+.language-button.active {
+    background-color: var(--accent-primary);
+    color: white;
+}
   

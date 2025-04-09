@@ -12,6 +12,7 @@ import { Footer } from './components/footer/Footer';
 import { Terms } from './pages/terms/Terms';
 import { Privacy } from './pages/privacy/Privacy';
 import "./App.css";
+import './i18n/config';
 
 function App() {
   return (

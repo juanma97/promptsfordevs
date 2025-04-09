@@ -1,0 +1,49 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "themeToggle": "Cambiar Tema"
+  },
+  "home": {
+    "title": "Bienvenido a Prompts for Devs",
+    "subtitle": "Encuentra el prompt perfecto para tus necesidades de desarrollo",
+    "searchPlaceholder": "Buscar prompts...",
+    "noResults": "No se encontraron resultados",
+    "loading": "Cargando...",
+    "error": "Error al cargar los prompts"
+  },
+  "terms": {
+    "title": "Términos de Servicio",
+    "lastUpdated": "Última actualización: {{date}}",
+    "sections": {
+      "introduction": {
+        "title": "Introducción",
+        "content": "Bienvenido a Prompts for Devs. Al acceder a nuestro sitio web, aceptas estos términos."
+      },
+      "useLicense": {
+        "title": "Licencia de Uso",
+        "content": "Se concede permiso para descargar temporalmente una copia de los materiales en el sitio web de Prompts for Devs solo para visualización personal y no comercial."
+      }
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "lastUpdated": "Última actualización: {{date}}",
+    "sections": {
+      "introduction": {
+        "title": "Introducción",
+        "content": "Tu privacidad es importante para nosotros. Esta Política de Privacidad explica cómo recopilamos, utilizamos y protegemos tu información personal."
+      },
+      "dataCollection": {
+        "title": "Recopilación de Datos",
+        "content": "Recopilamos información que nos proporcionas directamente, incluyendo cuando creas una cuenta, utilizas nuestros servicios o te comunicas con nosotros."
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} Prompts for Devs. Todos los derechos reservados.",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad"
+  }
+} 
