@@ -8,6 +8,9 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { SubmitPrompt } from "./pages/submit-prompt/SubmitPrompt";
 import { PopularPage } from "./pages/popular/PopularPage";
 import { FeaturedPage } from "./pages/featured/FeaturedPage";
+import { Footer } from './components/footer/Footer';
+import { Terms } from './pages/terms/Terms';
+import { Privacy } from './pages/privacy/Privacy';
 import "./App.css";
 
 function App() {
@@ -24,8 +27,11 @@ function App() {
                 <Route path="/submit" component={SubmitPrompt} />
                 <Route path="/popular" component={PopularPage} />
                 <Route path="/featured" component={FeaturedPage} />
+                <Route path="/terminos" component={Terms} />
+                <Route path="/privacidad" component={Privacy} />
               </Switch>
             </main>
+            <Footer />
           </div>
         </PromptProvider>
       </AuthProvider>
