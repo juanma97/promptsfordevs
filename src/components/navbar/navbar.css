@@ -2,17 +2,21 @@
 
 /* Contenedor principal de la Navbar */
 .navbar {
-    background: white;
-    padding: 1rem 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
     z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Contenedor interno */
 .nav-container {
     max-width: 1200px;
+    height: 4rem;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -25,7 +29,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     text-decoration: none;
-    color: #1f2937;
+    color: var(--text-primary);
     background: linear-gradient(90deg, #f59e0b, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -41,6 +45,22 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+/* Botón de tema */
+.nav-theme-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-theme-btn:hover {
+    background: var(--bg-hover);
+    transform: translateY(-1px);
 }
 
 /* Botón de crear */
@@ -59,34 +79,34 @@
 }
 
 .nav-create-btn {
-    background: #f3f4f6;
-    color: #4b5563;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 .nav-create-btn:hover {
-    background: #e5e7eb;
+    background: var(--bg-hover);
     transform: translateY(-1px);
 }
 
 /* Premium */
 .nav-premium {
-    background: #fef3c7;
-    color: #92400e;
+    background: var(--premium-bg);
+    color: var(--premium-text);
 }
 
 .nav-premium:hover {
-    background: #fde68a;
+    background: var(--premium-hover);
     transform: translateY(-1px);
 }
 
 /* Botón de sesión */
 .nav-auth-btn {
-    background: #f3f4f6;
-    color: #4b5563;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
 }
 
 .nav-auth-btn:hover {
-    background: #e5e7eb;
+    background: var(--bg-hover);
     transform: translateY(-1px);
 }
 
@@ -112,13 +132,13 @@
     padding: 0;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .auth-buttons .nav-auth-btn:hover {
-    background: rgba(109, 40, 217, 0.1);
+    background: var(--bg-hover);
 }
 
 /* Ajustes responsivos */
@@ -156,15 +176,15 @@
 
 /* Botón de cerrar sesión */
 .logout-btn {
-    background: #ff4d4d;
-    color: white;
-    border-color: #ff4d4d;
+    background: var(--error-bg);
+    color: var(--error-text);
+    border-color: var(--error-border);
     display: flex;
     align-items: center;
 }
 
 .logout-btn:hover {
-    background: #d43f3f;
+    background: var(--error-hover);
 }
 
 .tooltip-wrapper {
@@ -176,8 +196,8 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: #1f2937;
-    color: white;
+    background: var(--tooltip-bg);
+    color: var(--tooltip-text);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-size: 0.875rem;
@@ -194,11 +214,41 @@
     transform: translateX(-50%) translateY(0.5rem);
 }
 
-/* Efectos de hover */
-.nav-create-btn:hover,
-.nav-premium:hover,
-.nav-auth-btn:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+/* Variables CSS para el modo oscuro */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-hover: #e5e7eb;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --premium-bg: #fef3c7;
+    --premium-text: #92400e;
+    --premium-hover: #fde68a;
+    --error-bg: #ff4d4d;
+    --error-text: #ffffff;
+    --error-border: #ff4d4d;
+    --error-hover: #d43f3f;
+    --tooltip-bg: #1f2937;
+    --tooltip-text: #ffffff;
+}
+
+.dark {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-hover: #3d3d3d;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: #3d3d3d;
+    --premium-bg: #3d2d00;
+    --premium-text: #fef3c7;
+    --premium-hover: #4d3d00;
+    --error-bg: #cc0000;
+    --error-text: #ffffff;
+    --error-border: #cc0000;
+    --error-hover: #b30000;
+    --tooltip-bg: #f3f4f6;
+    --tooltip-text: #1f2937;
 }
 
 .nav-links {

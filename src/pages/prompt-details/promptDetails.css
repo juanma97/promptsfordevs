@@ -1,14 +1,14 @@
 .container {
   max-width: 1000px;
-  margin: 2rem auto;
-  padding: 2rem 1rem;
+  margin: 0 auto;
+  padding: 4rem 1rem 2rem;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .loading-placeholder {
   height: 600px;
-  background-color: #e5e7eb;
+  background-color: var(--bg-secondary);
   border-radius: 8px;
   animation: pulse 1.5s infinite ease-in-out;
 }
@@ -20,17 +20,18 @@
 }
 
 .card {
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   padding: 2rem;
+  border: 1px solid var(--border-color);
 }
 
 .card h1 {
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #222;
+  color: var(--text-primary);
 }
 
 .flex {
@@ -59,7 +60,7 @@
 }
 
 .text-muted-foreground {
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .prose {
@@ -67,7 +68,7 @@
   line-height: 1.75;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #444;
+  color: var(--text-primary);
 }
 
 .relative {
@@ -87,7 +88,7 @@
 }
 
 .bg-muted {
-  background-color: #f3f4f6;
+  background-color: var(--bg-secondary);
 }
 
 .p-4 {
@@ -99,7 +100,7 @@
 }
 
 .border {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
 }
 
 .space-y-4 > * + * {
@@ -115,18 +116,18 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .button-outline:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
-  color: #4b5563;
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
 }
 
 .button-outline:active {
@@ -145,31 +146,32 @@
 }
 
 .review {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.25rem;
   margin-bottom: 1rem;
-  background-color: #fafafa;
+  background-color: var(--bg-secondary);
   transition: box-shadow 0.2s ease, border-color 0.5s ease-in-out;
 }
 
 .review:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-color: black;
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-primary);
 }
 
 .container h2 {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .prompt-details {
-  background-color: #fff;
+  background-color: var(--bg-primary);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
+  margin-top: 0;
 }
 
 .title {
@@ -189,9 +191,9 @@
 .full-content {
   margin: 3rem 0;
   position: relative;
-  background: white;
+  background: var(--bg-primary);
   border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -200,9 +202,9 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #111827;
-  border-bottom: 1px solid #e5e7eb;
-  background: #f9fafb;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-secondary);
 }
 
 .prompt-container {
@@ -213,9 +215,9 @@
 .prompt-container pre {
   margin: 0;
   padding: 1rem;
-  background: #f8fafc;
+  background: var(--bg-secondary);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.95rem;
   line-height: 1.6;
@@ -223,6 +225,7 @@
   word-wrap: break-word;
   max-height: 500px;
   overflow-y: auto;
+  color: var(--text-primary);
 }
 
 .prompt-container pre::-webkit-scrollbar {
@@ -230,32 +233,32 @@
 }
 
 .prompt-container pre::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--bg-secondary);
   border-radius: 3px;
 }
 
 .prompt-container pre::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--border-color);
   border-radius: 3px;
 }
 
 .prompt-container pre::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--text-secondary);
 }
 
 .add-review {
   margin-top: 4rem;
   padding: 1.5rem;
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: var(--bg-secondary);
   border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
 }
 
 .add-review h2 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #111827;
+  color: var(--text-primary);
 }
 
 .rating-input {
@@ -266,23 +269,24 @@
   width: 100%;
   min-height: 100px;
   padding: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   font-size: 0.95rem;
   resize: vertical;
-  background-color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   transition: border-color 0.2s ease;
 }
 
 .add-review textarea:focus {
   outline: none;
-  border-color: #6d28d9;
-  box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.1);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
 }
 
 .add-review .button {
   margin-top: 1rem;
-  background-color: #6d28d9;
+  background-color: var(--accent-primary);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
@@ -291,7 +295,8 @@
 }
 
 .add-review .button:hover {
-  background-color: #5b21b6;
+  background-color: var(--accent-primary);
+  opacity: 0.9;
 }
 
 .reviews-container {
@@ -306,17 +311,17 @@
 }
 
 .reviews-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--bg-secondary);
   border-radius: 3px;
 }
 
 .reviews-container::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--border-color);
   border-radius: 3px;
 }
 
 .reviews-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--text-secondary);
 }
 
 .reviews-header {
@@ -333,38 +338,38 @@
 
 .sort-button {
   padding: 0.5rem 1rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: white;
-  color: #6b7280;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
   font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .sort-button:hover {
-  background: #f9fafb;
-  color: #4b5563;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .sort-button.active {
-  background: #6d28d9;
+  background: var(--accent-primary);
   color: white;
-  border-color: #6d28d9;
+  border-color: var(--accent-primary);
 }
 
 .review {
   padding: 1.25rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   margin-bottom: 1rem;
-  background: white;
+  background: var(--bg-primary);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .review:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
 }
 
 .review .rating {
@@ -372,7 +377,7 @@
 }
 
 .review .comment {
-  color: #374151;
+  color: var(--text-primary);
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 0.75rem;
@@ -389,16 +394,16 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: var(--text-secondary);
 }
 
 .review .author {
   font-weight: 500;
-  color: #4b5563;
+  color: var(--text-primary);
 }
 
 .review .date {
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 .prompt-header {
@@ -418,20 +423,20 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 0.875rem;
 }
 
 .stat svg {
-  color: #8b5cf6;
+  color: var(--accent-primary);
 }
 
 .featured-badge {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: #f3f4f6;
-  color: #8b5cf6;
+  background: var(--bg-secondary);
+  color: var(--accent-primary);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   font-weight: 500;
@@ -460,14 +465,14 @@
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
   transition: all 0.2s;
-  color: #6b7280;
+  color: var(--text-secondary);
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .like-button:hover {
-  background-color: #f3f4f6;
+  background-color: var(--bg-secondary);
 }
 
 .like-button:disabled {

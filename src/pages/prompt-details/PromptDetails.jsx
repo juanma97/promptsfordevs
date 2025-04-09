@@ -228,149 +228,151 @@ export function PromptDetails() {
   };
 
   if (loading) {
-    return <div className="container loading">Cargando...</div>;
+    return <div className="container">Cargando...</div>;
   }
 
   if (!prompt) {
-    return <div className="container error">Prompt no encontrado</div>;
+    return <div className="container">Prompt no encontrado</div>;
   }
 
   return (
-    <div className="container prompt-details">
-      <div className="card">
-        <div className="prompt-header">
-          <div>
-            <h1 className="title">{prompt.title}</h1>
-            <div className="prompt-stats">
-              <div className="stat">
-                <Eye size={16} />
-                <span>{prompt.views || 0} vistas</span>
-              </div>
-              <div className="stat">
-                <button 
-                  className={`like-button ${liked ? 'liked' : ''}`}
-                  onClick={handleLike}
-                  disabled={!user}
-                >
-                  <Heart 
-                    size={16} 
-                    fill={liked ? 'currentColor' : 'none'} 
-                  />
-                  <span>{likeCount}</span>
-                </button>
-              </div>
-              <div className="stat">
-                <Star size={16} />
-                <span>{avgRating.toFixed(1)} ({ratings.length} reviews)</span>
+    <div className="container">
+      <div className="prompt-details">
+        <div className="card">
+          <div className="prompt-header">
+            <div>
+              <h1 className="title">{prompt.title}</h1>
+              <div className="prompt-stats">
+                <div className="stat">
+                  <Eye size={16} />
+                  <span>{prompt.views || 0} vistas</span>
+                </div>
+                <div className="stat">
+                  <button 
+                    className={`like-button ${liked ? 'liked' : ''}`}
+                    onClick={handleLike}
+                    disabled={!user}
+                  >
+                    <Heart 
+                      size={16} 
+                      fill={liked ? 'currentColor' : 'none'} 
+                    />
+                    <span>{likeCount}</span>
+                  </button>
+                </div>
+                <div className="stat">
+                  <Star size={16} />
+                  <span>{avgRating.toFixed(1)} ({ratings.length} reviews)</span>
+                </div>
               </div>
             </div>
+            {prompt.isFeatured && (
+              <div className="featured-badge">
+                <Star size={16} />
+                Destacado
+              </div>
+            )}
           </div>
-          {prompt.isFeatured && (
-            <div className="featured-badge">
-              <Star size={16} />
-              Destacado
+          <div className="info flex gap-4 mb-6">
+            <div className="rating-container flex gap-2">
+              <RatingStars rating={avgRating} size={20} />
+              <span className="text-sm text-muted-foreground">({avgRating.toFixed(1)})</span>
+            </div>
+          </div>
+          <div className="description prose">
+            <h2>Descripción</h2>
+            <p>{prompt.description}</p>
+          </div>
+          <div className="full-content">
+            <h2>Prompt</h2>
+            <div className="prompt-container">
+              <pre>{prompt.content}</pre>
+              <button 
+                className="button-outline" 
+                onClick={() => copyToClipboard(prompt.content)}
+                title="Copiar prompt"
+              >
+                {copied ? <Check /> : <Copy />}
+              </button>
+            </div>
+          </div>
+
+          {/* Formulario para agregar una review */}
+          {user && (
+            <div className="add-review">
+              <h2>Deja tu review</h2>
+              <div className="rating-input">
+                <p className="text-sm text-muted-foreground mb-2">¿Cómo calificarías este prompt?</p>
+                <RatingStars rating={newRating} size={24} onRate={setNewRating} />
+              </div>
+              <div className="comment-input">
+                <p className="text-sm text-muted-foreground mb-2">Tu comentario</p>
+                <textarea
+                  placeholder="Escribe tu opinión sobre este prompt..."
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+              </div>
+              <button 
+                className="button" 
+                onClick={handleSubmitReview}
+                disabled={!newRating || !newComment.trim()}
+              >
+                Enviar Review
+              </button>
+            </div>
+          )}
+
+          {/* Sección de reviews */}
+          {ratings.length > 0 && (
+            <div className="reviews-container">
+              <div className="reviews-header">
+                <h2 className="text-xl font-semibold">Reviews</h2>
+                <div className="sort-options">
+                  <button 
+                    className={`sort-button ${sortBy === 'newest' ? 'active' : ''}`}
+                    onClick={() => setSortBy('newest')}
+                  >
+                    Más recientes
+                  </button>
+                  <button 
+                    className={`sort-button ${sortBy === 'highest' ? 'active' : ''}`}
+                    onClick={() => setSortBy('highest')}
+                  >
+                    Más positivas
+                  </button>
+                  <button 
+                    className={`sort-button ${sortBy === 'lowest' ? 'active' : ''}`}
+                    onClick={() => setSortBy('lowest')}
+                  >
+                    Más negativas
+                  </button>
+                </div>
+              </div>
+              {sortedRatings.map((rating) => (
+                <div key={rating.id} className="review">
+                  <div className="rating flex gap-2">
+                    <RatingStars rating={rating.rating} size={16} />
+                    <span className="text-sm text-muted-foreground">
+                      ({rating.rating.toFixed(1)})
+                    </span>
+                  </div>
+                  <p className="comment">{rating.comment}</p>
+                  <div className="footer">
+                    <span className="author">{rating.author}</span>
+                    <span className="date">
+                      {new Date(rating.createdAt).toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
-        <div className="info flex gap-4 mb-6">
-          <div className="rating-container flex gap-2">
-            <RatingStars rating={avgRating} size={20} />
-            <span className="text-sm text-muted-foreground">({avgRating.toFixed(1)})</span>
-          </div>
-        </div>
-        <div className="description prose">
-          <h2>Descripción</h2>
-          <p>{prompt.description}</p>
-        </div>
-        <div className="full-content">
-          <h2>Prompt</h2>
-          <div className="prompt-container">
-            <pre>{prompt.content}</pre>
-            <button 
-              className="button-outline" 
-              onClick={() => copyToClipboard(prompt.content)}
-              title="Copiar prompt"
-            >
-              {copied ? <Check /> : <Copy />}
-            </button>
-          </div>
-        </div>
-
-        {/* Formulario para agregar una review */}
-        {user && (
-          <div className="add-review">
-            <h2>Deja tu review</h2>
-            <div className="rating-input">
-              <p className="text-sm text-muted-foreground mb-2">¿Cómo calificarías este prompt?</p>
-              <RatingStars rating={newRating} size={24} onRate={setNewRating} />
-            </div>
-            <div className="comment-input">
-              <p className="text-sm text-muted-foreground mb-2">Tu comentario</p>
-              <textarea
-                placeholder="Escribe tu opinión sobre este prompt..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-            </div>
-            <button 
-              className="button" 
-              onClick={handleSubmitReview}
-              disabled={!newRating || !newComment.trim()}
-            >
-              Enviar Review
-            </button>
-          </div>
-        )}
-
-        {/* Sección de reviews */}
-        {ratings.length > 0 && (
-          <div className="reviews-container">
-            <div className="reviews-header">
-              <h2 className="text-xl font-semibold">Reviews</h2>
-              <div className="sort-options">
-                <button 
-                  className={`sort-button ${sortBy === 'newest' ? 'active' : ''}`}
-                  onClick={() => setSortBy('newest')}
-                >
-                  Más recientes
-                </button>
-                <button 
-                  className={`sort-button ${sortBy === 'highest' ? 'active' : ''}`}
-                  onClick={() => setSortBy('highest')}
-                >
-                  Más positivas
-                </button>
-                <button 
-                  className={`sort-button ${sortBy === 'lowest' ? 'active' : ''}`}
-                  onClick={() => setSortBy('lowest')}
-                >
-                  Más negativas
-                </button>
-              </div>
-            </div>
-            {sortedRatings.map((rating) => (
-              <div key={rating.id} className="review">
-                <div className="rating flex gap-2">
-                  <RatingStars rating={rating.rating} size={16} />
-                  <span className="text-sm text-muted-foreground">
-                    ({rating.rating.toFixed(1)})
-                  </span>
-                </div>
-                <p className="comment">{rating.comment}</p>
-                <div className="footer">
-                  <span className="author">{rating.author}</span>
-                  <span className="date">
-                    {new Date(rating.createdAt).toLocaleDateString('es-ES', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import {
   signInWithPopup, 
   GoogleAuthProvider, 
   GithubAuthProvider,
+  sendPasswordResetEmail,
   onAuthStateChanged, 
   signOut 
 } from "firebase/auth";
@@ -18,6 +19,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authError, setAuthError] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -50,6 +52,47 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // const loginWithEmail = async (email, password) => {
+  //   try {
+  //     setAuthError(null);
+  //     const result = await signInWithEmailAndPassword(auth, email, password);
+  //     setUser(result.user);
+  //   } catch (error) {
+  //     setAuthError(
+  //       error.code === 'auth/user-not-found' ? 'Usuario no encontrado' :
+  //       error.code === 'auth/wrong-password' ? 'Contraseña incorrecta' :
+  //       'Error al iniciar sesión'
+  //     );
+  //     throw error;
+  //   }
+  // };
+
+  // const registerWithEmail = async (email, password) => {
+  //   try {
+  //     setAuthError(null);
+  //     const result = await createUserWithEmailAndPassword(auth, email, password);
+  //     setUser(result.user);
+  //   } catch (error) {
+  //     setAuthError(
+  //       error.code === 'auth/email-already-in-use' ? 'El email ya está en uso' :
+  //       error.code === 'auth/weak-password' ? 'La contraseña debe tener al menos 6 caracteres' :
+  //       'Error al registrar usuario'
+  //     );
+  //     throw error;
+  //   }
+  // };
+
+  const resetPassword = async (email) => {
+    try {
+      setAuthError(null);
+      await sendPasswordResetEmail(auth, email);
+      return true;
+    } catch (error) {
+      setAuthError('Error al enviar el email de recuperación');
+      throw error;
+    }
+  };
+
   const logout = async () => {
     await signOut(auth);
     setUser(null);
@@ -59,9 +102,11 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider value={{ 
       user, 
       loginWithGoogle, 
-      loginWithGithub, 
+      loginWithGithub,
+      resetPassword,
       logout, 
-      loading 
+      loading,
+      authError 
     }}>
       {children}
     </AuthContext.Provider>
