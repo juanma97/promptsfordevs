@@ -8,15 +8,35 @@ import { useAuth } from "../../hooks/useAuth";
 import { useTheme } from "../../context/ThemeContext";
 import { useTranslation } from 'react-i18next';
 import "./navbar.css";
+import { useAnalytics } from '../../hooks/useAnalytics';
 
 export function Navbar() {
   const { user, loginWithGoogle, loginWithGithub, logout } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const { t, i18n } = useTranslation();
   const [tooltip, setTooltip] = useState(null);
+  const { logLogin } = useAnalytics();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      logLogin('google');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    try {
+      await loginWithGithub();
+      logLogin('github');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -82,10 +102,10 @@ export function Navbar() {
             </div>
           ) : (
             <div className="auth-buttons">
-              <Button className="nav-auth-btn" onClick={loginWithGoogle}>
+              <Button className="nav-auth-btn" onClick={handleGoogleLogin}>
                 <FcGoogle size={20} />
               </Button>
-              <Button className="nav-auth-btn" onClick={loginWithGithub}>
+              <Button className="nav-auth-btn" onClick={handleGithubLogin}>
                 <FaGithub size={20} />
               </Button>
             </div>

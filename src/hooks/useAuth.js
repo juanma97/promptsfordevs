@@ -8,7 +8,7 @@ import {
   onAuthStateChanged, 
   signOut 
 } from "firebase/auth";
-import { app } from "../firebaseConfig";
+import { app, setUserAnalytics } from "../firebaseConfig";
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
@@ -24,6 +24,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setUserAnalytics(currentUser);
       setLoading(false);
     });
 

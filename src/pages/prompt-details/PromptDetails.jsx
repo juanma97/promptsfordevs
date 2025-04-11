@@ -8,6 +8,7 @@ import { collection, addDoc, getDocs, getDoc, doc, updateDoc, query, where, incr
 import { getAuth } from 'firebase/auth';
 import './promptDetails.css';
 import { SEO } from '../../components/seo/SEO';
+import { useAnalytics } from '../../hooks/useAnalytics';
 
 export function PromptDetails() {
   const [, params] = useRoute('/prompt/:id');
@@ -24,6 +25,7 @@ export function PromptDetails() {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [viewCounted, setViewCounted] = useState(false);
+  const { logPromptView, logPromptCopy, logPromptLike } = useAnalytics();
 
   useEffect(() => {
     if (selectedPrompt && selectedPrompt.id === params?.id) {
@@ -52,6 +54,12 @@ export function PromptDetails() {
 
     handleViewCount();
   }, [prompt?.docId, viewCounted]);
+
+  useEffect(() => {
+    if (prompt) {
+      logPromptView(prompt.id, prompt.title);
+    }
+  }, [prompt?.id]);
 
   const loadPromptFromFirestore = async () => {
     try {
@@ -97,6 +105,7 @@ export function PromptDetails() {
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      logPromptCopy(prompt.id, prompt.title);
     } catch (error) {
       alert('Error al copiar, inténtalo de nuevo.');
     }
@@ -221,6 +230,8 @@ export function PromptDetails() {
         likes: newLikeCount,
         userLikes: updatedUserLikes
       }));
+
+      logPromptLike(prompt.id, prompt.title);
 
     } catch (error) {
       console.error('Error al actualizar likes:', error);

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent, setUserProperties } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -13,9 +13,41 @@ const firebaseConfig = {
     measurementId: "G-H5HS96ZCB7"
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
-const auth = getAuth(app);
+export const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const analytics = getAnalytics(app);
 
-export { app, auth, db, analytics };
+// Función helper mejorada para analytics
+export const logAnalyticsEvent = (eventName, eventParams = {}) => {
+  try {
+    logEvent(analytics, eventName, eventParams);
+    
+    // Debug en desarrollo
+    if (process.env.NODE_ENV === 'development') {
+      console.group('Firebase Analytics Event');
+      console.log('Event:', eventName);
+      console.log('Params:', eventParams);
+      console.groupEnd();
+    }
+  } catch (error) {
+    console.error('Error logging analytics event:', error);
+  }
+};
+
+// Configurar Analytics para desarrollo
+if (process.env.NODE_ENV === 'development') {
+  // Habilitar debug mode en desarrollo
+  window.localStorage.setItem('debug', 'firebase:*');
+}
+
+// Configurar propiedades de usuario cuando se identifica
+export const setUserAnalytics = (user) => {
+  if (user) {
+    setUserProperties(analytics, {
+      user_id: user.uid,
+      user_type: user.emailVerified ? 'verified' : 'unverified',
+      // Otras propiedades que quieras trackear
+    });
+  }
+};

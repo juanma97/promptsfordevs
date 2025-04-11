@@ -13,8 +13,11 @@ import { Terms } from './pages/terms/Terms';
 import { Privacy } from './pages/privacy/Privacy';
 import "./App.css";
 import './i18n/config';
+import { useAnalytics } from './hooks/useAnalytics';
 
 function App() {
+  useAnalytics();
+
   return (
     <ThemeProvider>
       <AuthProvider>
