@@ -258,7 +258,7 @@ export function PromptDetails() {
           url={`https://promptsfordevs.com/prompt/${prompt.id}`}
         />
       )}
-      <div className="container">
+      <div className="container-prompt-details">
         <div className="prompt-details">
           <div className="card">
             <div className="prompt-header">

@@ -1,6 +1,7 @@
-.container {
-  max-width: 1000px !important;
-  margin: 0 auto;
+.container-prompt-details {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
   padding: 2rem 1rem 2rem !important;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: var(--text-primary);
@@ -172,6 +173,7 @@
   padding: 2rem;
   box-shadow: var(--shadow-md);
   margin-top: 0;
+  width: 90%;
 }
 
 .title {

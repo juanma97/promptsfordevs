@@ -126,7 +126,7 @@ export function Navbar() {
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
                   <img 
-                    src={user.photoURL || '/default-avatar.png'} 
+                    src={user.photoURL || '/favicon.ico'} 
                     alt="Avatar" 
                     className="user-avatar"
                   />
