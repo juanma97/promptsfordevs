@@ -14,6 +14,7 @@ import { Privacy } from './pages/privacy/Privacy';
 import "./App.css";
 import './i18n/config';
 import { useAnalytics } from './hooks/useAnalytics';
+import { Profile } from './pages/profile/Profile';
 
 function App() {
   useAnalytics();
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/featured" component={FeaturedPage} />
                 <Route path="/terminos" component={Terms} />
                 <Route path="/privacidad" component={Privacy} />
+                <Route path="/profile" component={Profile} />
               </Switch>
             </main>
             <Footer />

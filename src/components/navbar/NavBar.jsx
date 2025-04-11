@@ -1,7 +1,7 @@
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "../button/Button";
-import { Plus, Crown, LogOut, Moon, Sun } from "lucide-react";
+import { Plus, Crown, LogOut, Moon, Sun, ChevronDown } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth"; 
@@ -16,6 +16,8 @@ export function Navbar() {
   const { t, i18n } = useTranslation();
   const [tooltip, setTooltip] = useState(null);
   const { logLogin } = useAnalytics();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -38,6 +40,20 @@ export function Navbar() {
       console.error(error);
     }
   };
+
+  // Cerrar el menú cuando se hace clic fuera
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className={`navbar ${isDarkMode ? 'dark' : ''}`}>
@@ -93,23 +109,49 @@ export function Navbar() {
             )}
           </div>
 
-          {user ? (
-            <div className="user-info">
-              <img src={user.photoURL || "/default-avatar.png"} alt="Avatar" className="user-avatar" />
-              <Button className="nav-auth-btn logout-btn" onClick={logout}>
-                <LogOut /> Cerrar sesión
-              </Button>
-            </div>
-          ) : (
-            <div className="auth-buttons">
-              <Button className="nav-auth-btn" onClick={handleGoogleLogin}>
-                <FcGoogle size={20} />
-              </Button>
-              <Button className="nav-auth-btn" onClick={handleGithubLogin}>
-                <FaGithub size={20} />
-              </Button>
-            </div>
-          )}
+          <div className="nav-auth">
+            {!user ? (
+              <>
+                <Button className="nav-auth-btn" onClick={handleGoogleLogin}>
+                  <FcGoogle size={20} />
+                </Button>
+                <Button className="nav-auth-btn" onClick={handleGithubLogin}>
+                  <FaGithub size={20} />
+                </Button>
+              </>
+            ) : (
+              <div className="user-menu" ref={menuRef}>
+                <button 
+                  className="user-menu-button"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                  <img 
+                    src={user.photoURL || '/default-avatar.png'} 
+                    alt="Avatar" 
+                    className="user-avatar"
+                  />
+                  <ChevronDown size={16} />
+                </button>
+
+                {isMenuOpen && (
+                  <div className="dropdown-menu">
+                    <Link href="/profile" onClick={() => setIsMenuOpen(false)}>
+                      <a className="dropdown-item">Mi Perfil</a>
+                    </Link>
+                    <button 
+                      className="dropdown-item"
+                      onClick={() => {
+                        logout();
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           <div className="language-buttons">
             <button 
               className={`language-button ${i18n.language === 'en' ? 'active' : ''}`}
