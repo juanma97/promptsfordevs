@@ -5,6 +5,7 @@ import { PromptCard } from "../../components/prompt-card/PromptCard";
 import "./home.css";
 import { usePrompts } from "../../hooks/usePrompts";
 import { useTranslation } from "react-i18next";
+import { SEO } from '../../components/seo/SEO';
 
 export function Home() {
   const { t } = useTranslation();
@@ -55,58 +56,65 @@ export function Home() {
   }, [loadMorePrompts]);
 
   return (
-    <div className="home-container">
-      <div className="hero-section">
-        <div className="hero-content">
-          <h1 className="hero-title">{t('home.hero.title')}</h1>
-          <p className="hero-subtitle">{t('home.hero.subtitle')}</p>
-          <div className="filters-container">
-            <div className="search-box">
-              <Search className="search-icon" />
-              <Input
-                className="search-input"
-                placeholder={t('home.search.placeholder')}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
+    <>
+      <SEO 
+        title="Inicio"
+        description="Explora nuestra colección de prompts optimizados para desarrolladores. Mejora tu productividad con IA."
+        keywords="prompts desarrollo, ChatGPT desarrollo, IA programación, prompts programación"
+      />
+      <div className="home-container">
+        <div className="hero-section">
+          <div className="hero-content">
+            <h1 className="hero-title">{t('home.hero.title')}</h1>
+            <p className="hero-subtitle">{t('home.hero.subtitle')}</p>
+            <div className="filters-container">
+              <div className="search-box">
+                <Search className="search-icon" />
+                <Input
+                  className="search-input"
+                  placeholder={t('home.search.placeholder')}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+              <select className="category-select" value={category} onChange={(e) => setCategory(e.target.value)}>
+                {CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat.toLowerCase()}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              <button className="reset-button" onClick={resetFilters}>
+                {t('home.filters.reset')}
+              </button>
             </div>
-            <select className="category-select" value={category} onChange={(e) => setCategory(e.target.value)}>
-              {CATEGORIES.map((cat) => (
-                <option key={cat} value={cat.toLowerCase()}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-            <button className="reset-button" onClick={resetFilters}>
-              {t('home.filters.reset')}
-            </button>
           </div>
         </div>
-      </div>
 
-      <div className="content-section">
-        {loading ? (
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <p>{t('home.loading')}</p>
-          </div>
-        ) : filteredPrompts.length > 0 ? (
-          <div className="grid-container">
-            {filteredPrompts.slice(0, visiblePrompts).map((prompt) => (
-              <PromptCard key={prompt.id} prompt={prompt} avgRating={4.5} />
-            ))}
-            {visiblePrompts < filteredPrompts.length && (
-              <div ref={loaderRef} className="loading-trigger">
-                <div className="loading-spinner" />
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="no-results">
-            <p>{t('home.noResults')}</p>
-          </div>
-        )}
+        <div className="content-section">
+          {loading ? (
+            <div className="loading-container">
+              <div className="loading-spinner"></div>
+              <p>{t('home.loading')}</p>
+            </div>
+          ) : filteredPrompts.length > 0 ? (
+            <div className="grid-container">
+              {filteredPrompts.slice(0, visiblePrompts).map((prompt) => (
+                <PromptCard key={prompt.id} prompt={prompt} avgRating={4.5} />
+              ))}
+              {visiblePrompts < filteredPrompts.length && (
+                <div ref={loaderRef} className="loading-trigger">
+                  <div className="loading-spinner" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="no-results">
+              <p>{t('home.noResults')}</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
