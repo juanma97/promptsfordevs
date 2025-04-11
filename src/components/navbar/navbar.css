@@ -391,4 +391,72 @@ a:not(.nav-logo) {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
+
+/* Agregar estas clases */
+.mobile-menu {
+    display: none;
+    position: relative;
+}
+
+.mobile-menu-btn {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mobile-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.mobile-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    background: none;
+}
+
+.language-container {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.language-container .language-buttons {
+    margin: 0.5rem 0 0 0;
+    padding: 0;
+    border: none;
+}
+
+/* Modificar la media query existente */
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .nav-actions {
+        gap: 0.5rem;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+}
   
