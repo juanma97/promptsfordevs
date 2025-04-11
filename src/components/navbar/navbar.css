@@ -370,7 +370,7 @@
     text-decoration: none;
 }
 
-a {
+a:not(.nav-logo) {
     text-decoration: none;
     background: none !important;
     color: var(--text-color) !important;
@@ -379,7 +379,7 @@ a {
 
 .dropdown-item:hover {
     background-color: var(--hover-color);
-    color: var(--text-color);
+    color: var(--text-color)
 }
 
 .dropdown-item:first-child {
