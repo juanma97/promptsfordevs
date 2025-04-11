@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "../button/Button";
-import { Plus, Crown, LogOut, Moon, Sun, ChevronDown, Menu } from "lucide-react";
+import { Plus, Crown, LogOut, Moon, Sun, ChevronDown } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth"; 
@@ -18,7 +18,6 @@ export function Navbar() {
   const { logLogin } = useAnalytics();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -61,49 +60,37 @@ export function Navbar() {
       <div className="nav-container">
         <Link href="/" className="nav-logo">Prompts for Devs</Link>
 
+        {/* <div className="nav-links">
+          <Link href="/featured" className="nav-link">
+            <Star size={16} />
+            Destacados
+          </Link>
+          <Link href="/popular" className="nav-link">
+            <TrendingUp size={16} />
+            Populares
+          </Link>
+        </div> */}
+
         <div className="nav-actions">
-          <div className="mobile-menu" ref={menuRef}>
-            <Button 
-              className="mobile-menu-btn"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              <Menu className="nav-icon" />
-            </Button>
+          <Button className="nav-theme-btn" onClick={toggleTheme}>
+            {isDarkMode ? <Sun className="nav-icon" /> : <Moon className="nav-icon" />}
+          </Button>
 
-            {isMobileMenuOpen && (
-              <div className="mobile-dropdown">
-                <Button className="dropdown-item" onClick={toggleTheme}>
-                  {isDarkMode ? <Sun className="nav-icon" /> : <Moon className="nav-icon" />}
-                  <span>{isDarkMode ? 'Modo Claro' : 'Modo Oscuro'}</span>
-                </Button>
-                
-                <div className="dropdown-item language-container">
-                  <span>Idioma</span>
-                  <div className="language-buttons">
-                    <button 
-                      className={`language-button ${i18n.language === 'en' ? 'active' : ''}`}
-                      onClick={() => changeLanguage('en')}
-                    >
-                      🇬🇧
-                    </button>
-                    <button 
-                      className={`language-button ${i18n.language === 'es' ? 'active' : ''}`}
-                      onClick={() => changeLanguage('es')}
-                    >
-                      🇪🇸
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="tooltip-wrapper">
+          <div 
+            className="tooltip-wrapper" 
+            onMouseEnter={() => setTooltip("crear")} 
+            onMouseLeave={() => setTooltip(null)}
+          >
             <Link href="/submit">
               <Button className="nav-create-btn" disabled={!user}>
                 <Plus className="nav-icon" />
               </Button>
             </Link>
+            {tooltip === "crear" && (
+              <div className="tooltip-content">
+                {user ? "Crear nuevo prompt" : "Inicia sesión para crear prompts"}
+              </div>
+            )}
           </div>
 
           <div 
@@ -165,27 +152,21 @@ export function Navbar() {
               </div>
             )}
           </div>
-
-          <div className="desktop-only">
-            <Button className="nav-theme-btn" onClick={toggleTheme}>
-              {isDarkMode ? <Sun className="nav-icon" /> : <Moon className="nav-icon" />}
-            </Button>
-            <div className="language-buttons">
-              <button 
-                className={`language-button ${i18n.language === 'en' ? 'active' : ''}`}
-                onClick={() => changeLanguage('en')}
-                title="English"
-              >
-                ��🇧
-              </button>
-              <button 
-                className={`language-button ${i18n.language === 'es' ? 'active' : ''}`}
-                onClick={() => changeLanguage('es')}
-                title="Español"
-              >
-                🇪🇸
-              </button>
-            </div>
+          <div className="language-buttons">
+            <button 
+              className={`language-button ${i18n.language === 'en' ? 'active' : ''}`}
+              onClick={() => changeLanguage('en')}
+              title="English"
+            >
+              🇬🇧
+            </button>
+            <button 
+              className={`language-button ${i18n.language === 'es' ? 'active' : ''}`}
+              onClick={() => changeLanguage('es')}
+              title="Español"
+            >
+              🇪🇸
+            </button>
           </div>
         </div>
       </div>
