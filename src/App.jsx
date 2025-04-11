@@ -23,19 +23,17 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <PromptProvider>
-          <div className="app-container">
+          <div className="app">
             <Navbar />
-            <main className="main-content">
-              <Switch>
-                <Route path="/" component={Home} />
-                <Route path="/prompt/:id" component={PromptDetails} />
-                <Route path="/submit" component={SubmitPrompt} />
-                <Route path="/popular" component={PopularPage} />
-                <Route path="/featured" component={FeaturedPage} />
-                <Route path="/terminos" component={Terms} />
-                <Route path="/privacidad" component={Privacy} />
-                <Route path="/profile" component={Profile} />
-              </Switch>
+            <main>
+              <Route path="/" component={Home} />
+              <Route path="/prompt/:id" component={PromptDetails} />
+              <Route path="/submit" component={SubmitPrompt} />
+              <Route path="/popular" component={PopularPage} />
+              <Route path="/featured" component={FeaturedPage} />
+              <Route path="/terminos" component={Terms} />
+              <Route path="/privacidad" component={Privacy} />
+              <Route path="/profile" component={Profile} />
             </main>
             <Footer />
           </div>
